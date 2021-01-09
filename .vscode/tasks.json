@@ -83,7 +83,7 @@
     {
       "label": "Run Node",
       "type": "shell",
-      "command": "npm run start",
+      "command": "npm run start:dev",
       "dependsOn": "Clear Screen",
       "group": {
         "kind": "build",
