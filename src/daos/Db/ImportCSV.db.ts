@@ -6,8 +6,8 @@ import { IDataset } from '@entities/Company';
 
 abstract class CSVDb {
 	private allData: IDataset;
-	private readonly dbFilePath = 'test.100.row.csv';
-	// private readonly dbFilePath = 'companies.csv';
+	// private readonly dbFilePath = 'test.100.row.csv';
+	private readonly dbFilePath = 'companies.csv';
 	private pattern = /(?:,|\n|^)("(?:(?:"")*[^"]*)*"|[^",\n]*|(?:\n|$))/;
 
 	constructor() {
