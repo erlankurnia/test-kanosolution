@@ -18,12 +18,15 @@ export interface ICompanies {
 	companies: obj[];
 }
 
-export interface IDataset {
+export interface IDataset extends Object {
 	header: string[];
 	data: string[][];
-	rowsCount: number;
-	columnsCount: number;
+	entries: number;
+	totalEntries: number;
+	field: number;
 	message: string;
+	page: number;
+	perPage: number;
 }
 
 export default Company;

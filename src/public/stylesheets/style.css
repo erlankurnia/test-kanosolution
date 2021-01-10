@@ -1,5 +1,5 @@
 body {
-	padding: 100px;
+	padding: 16px 96px;
 	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -30,4 +30,39 @@ body .users-column .user-display-ele button {
 
 body .users-column .user-display-ele .edit-view {
 	display: none;
+}
+
+#form-search {
+	padding: 16px;
+}
+
+#form-search input {
+	font-size: small;
+	padding: 4px 8px;
+}
+
+.table-responsive #all-dataset-anchor {
+	border-top: 0;
+	white-space: nowrap;
+	font-size: small;
+}
+
+.table-responsive {
+	overflow-y: auto;
+	height: 460px;
+}
+
+.table-responsive #all-dataset-anchor tr {
+	border-top: 0;
+	border-bottom: 0;
+}
+
+.table-responsive #all-dataset-anchor thead th {
+	position: sticky;
+	top: 0;
+	background: white;
+}
+
+#form-pagination {
+	font-size: small;
 }

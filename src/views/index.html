@@ -4,31 +4,66 @@
 		<meta charset="UTF-8">
 		<title>ExpressGeneratorTypeScriptApp</title>
 		<link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+		<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap/bootstrap.min.css" />
 	</head>
 	<body>
 
-		<!-- Add Users -->
-		<div class="users-column add-user-col">
-			<div class="column-header">Add User:</div>
-			<div>
-				<input id="name-input" placeholder="Name">
+		<!-- Add Users
+			<div class="users-column add-user-col">
+				<div class="column-header">Add User:</div>
+				<div>
+					<input id="name-input" placeholder="Name">
+				</div>
+				<div>
+					<input id="email-input" placeholder="Email">
+				</div>
+				<div>
+					<button id="add-user-btn">Add</button>
+				</div>
 			</div>
-			<div>
-				<input id="email-input" placeholder="Email">
+		-->
+
+		<div class="container">
+			<!-- Table Dataset -->
+			<div id="form-search" class="row">
+				<div class="col-sm-4 input-group-sm"><input type="text" name="cmgnmaskedname" class="form-control" id="cmgnmaskedname" placeholder="Search for CMGUnmaskedName"></div>
+				<div class="col-sm-4 input-group-sm"><input type="text" name="clienttier" class="form-control" id="clienttier" placeholder="Search for ClientTier"></div>
+				<div class="col-sm-4 input-group-sm"><input type="text" name="cmgsegmentname" class="form-control" id="cmgsegmentname" placeholder="Search for CMGSegmentName"></div>
 			</div>
-			<div>
-				<button id="add-user-btn">Add</button>
+			<div class="table-responsive">
+				<table id="all-dataset-anchor" class="table table-sm table-hover table-striped">
+				</table>
+			</div>
+			<!-- Table Dataset -->
+			<div id="form-pagination" class="row">
+				<div class="col-sm-4">
+					<p>Showing 1 to 50 of 100 entries</p>
+				</div>
+				<div class="col-sm-8">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-end">
+							<li class="page-item disabled">
+								<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+							</li>
+							<li class="page-item"><a class="page-link" href="#">1</a></li>
+							<li class="page-item"><a class="page-link" href="#">2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item"><a class="page-link" href="#">4</a></li>
+							<li class="page-item"><a class="page-link" href="#">5</a></li>
+							<li class="page-item"><p class="disabled">...</p></li>
+							<li class="page-item"><a class="page-link" href="#">100</a></li>
+							<li class="page-item">
+								<a class="page-link" href="#">Next</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
 			</div>
 		</div>
-
-		<!-- Display Users -->
-		<div class="users-column">
-			<div class="column-header">Users:</div>
-			<div id="all-users-anchor"></div>
-		</div>
-
 
 
 	</body>
+	<script src="scripts/bootstrap/jquery-3.3.1.slim.min.js"></script>
+	<script src="scripts/bootstrap/bootstrap.min.js"></script>
 	<script src="scripts/index.js"></script>
 </html>

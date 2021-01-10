@@ -11,12 +11,28 @@ abstract class CSVDb {
 	private pattern = /(?:,|\n|^)("(?:(?:"")*[^"]*)*"|[^",\n]*|(?:\n|$))/;
 
 	constructor() {
-		this.allData = {
+		this.allData =  {
 			header: [],
 			data: [],
-			rowsCount: 0,
-			columnsCount: 0,
-			message: ''
+			entries: 0,
+			totalEntries: 0,
+			field: 0,
+			message: '',
+			page: 1,
+			perPage: 50
+		};
+	}
+
+	private resetData(): IDataset {
+		return {
+			header: [],
+			data: [],
+			entries: 0,
+			totalEntries: 0,
+			field: 0,
+			message: (this.allData.message == '') ? '' : this.allData.message,
+			page: 1,
+			perPage: 50
 		};
 	}
 
@@ -33,10 +49,28 @@ abstract class CSVDb {
 		});
 
 		if (res.ok) {
+			this.allData = this.resetData();
 			const data: string = await res.text();
 			const rows: string[] = data.split('\n');
+			this.allData.page = parseInt(req.query.page as string || '1');
+			this.allData.perPage = parseInt(req.query.perPage as string || '50');
+			const start: number = (this.allData.page - 1) * this.allData.perPage + 1;
+			const limit: number =
+				(start + this.allData.perPage > rows.length) 
+					? rows.length : start + this.allData.perPage;
 			
-			for (let h = 0; h < rows.length; h++) {
+			// Add Header
+			const col = rows[0].split(this.pattern);
+
+			for(let i = 0; i < col.length; i++) {
+				if (i % 2 != 0) {
+					col[i] = col[i].replace(/^\s|\s$|\r$/, '');
+					this.allData.header.push(col[i].split('"').join(''));
+				}
+			}
+			
+			// Add data
+			for (let h = start; h < limit; h++) {
 				let row: string[] = [];
 				let col: string[] = [];
 				row = rows[h].split(this.pattern);
@@ -44,21 +78,19 @@ abstract class CSVDb {
 				for(let i = 0; i < row.length; i++) {
 					if (i % 2 != 0) {
 						row[i] = row[i].replace(/^\s|\s$|\r$/, '');
-						if (i <= 2 && col.length < 2) {
-							col[0] = row[i].split('"').join('');
-						} else {
-							col.push(row[i].split('"').join(''));
-						}
+						col.push(row[i].split('"').join(''));
 					}
 				}
-				if (h == 0) {
-					this.allData.header.push(...col);
-				} else {
-					this.allData.data.push(col);
-				}
+				
+				this.allData.data.push(col);
 			}
-			this.allData.rowsCount = this.allData.data.length;
-			this.allData.columnsCount = this.allData.header.length;
+
+			// Add Header Count
+			this.allData.field = this.allData.header.length;
+			// Add Total Data Count
+			this.allData.totalEntries = rows.length - 1;
+			// Add Data Count
+			this.allData.entries = this.allData.data.length;
 		}
 
 		return Promise.resolve(this.allData);
