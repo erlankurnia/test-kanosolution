@@ -1,5 +1,4 @@
 import { Request } from 'express';
-import { IUser } from '@entities/User';
 import { IDataset } from '@entities/Company';
 
 
@@ -10,9 +9,3 @@ export interface IRequestCompany extends Request {
         dataset: IDataset;
     }
 }
-
-export interface IRequest extends Request {
-    body: {
-        user: IUser;
-    }
-} 
